@@ -1,27 +1,44 @@
+import { useEffect, useState } from 'react';
 import './App.css';
-
+const giphyApiKey = "rMDrIbf97CagdPyGQoG0KX9NbwyqzY5i"
 function App() {
+  const [catFact, setCatFact] = useState("");
+  const [catGif, setCatGif] = useState("");
+
+  const apiGiphy = (str) => {
+    fetch(`https://api.giphy.com/v1/gifs/search?q=${str}&api_key=${giphyApiKey}`)
+      .then(res => res.json())
+      .then((data) => setCatGif(data.data[0].images.original.url));
+  }
+
+  const fechedCatfact = () => {
+    fetch(`https://catfact.ninja/fact`)
+      .then(res => res.json())
+      .then((data) => {
+        setCatFact(data.fact)
+        apiGiphy(data.fact.split(" ").slice(0, 3).join(" "))
+      });
+
+  }
+
+
+  useEffect(() => {
+    fechedCatfact()
+
+  }, []);
+
+  // console.log(catFact);
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src="Octocat.png" className="App-logo" alt="logo" />
-        <p>
-          GitHub Codespaces <span className="heart">♥️</span> React
-        </p>
-        <p className="small">
-          Edit <code>src/App.jsx</code> and save to reload.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </p>
-      </header>
+    
+      <div style={{display: "flex", gap:"20px", alignItems: "center"}}>
+        <img src={catGif} style={{objectFit:"contain", width: "200px", height: "200px"}}/>
+         
+        <h4>{catFact}</h4>
+         
+        </div>
     </div>
   );
 }

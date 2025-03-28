@@ -1,3 +1,8 @@
+Gracia a MiduDev (youtube) por este ejercicio simulando una prueba tecnica. He aprendido cosas que me pueden venir bien. Tambien agradecer a Ikorotime por ofrecerse a ello.
+
+
+
+
 # GitHub Codespaces ♥️ React
 
 Welcome to your shiny new Codespace running React! We've got everything fired up and running for you to explore React.
